@@ -1,30 +1,47 @@
-import { Fragment } from 'react';
+import { Fragment, useContext } from 'react';
 import { Outlet, Link } from 'react-router-dom';
 
 import { ReactComponent as CrwnLogo } from '../../assets/crown.svg';
+import { UserContext } from '../../context/user.context';
+import { signOutUser } from '../../utils/firebase/firebase.util';
 
 import './navigation.styles.scss';
 
-const Navigation = () => (
-	<Fragment>
-		<div className='navigation'>
-			<Link className='logo-container' to='/'>
-				<CrwnLogo className='logo' />
-			</Link>
+const Navigation = () => {
+	const { currentUser, setCurrentUser } = useContext(UserContext);
 
-			<div className='nav-links-container'>
-				<Link className='nav-link' to='/shop'>
-					SHOP
+	const signOutHandler = async () => {
+		await signOutUser();
+		setCurrentUser(null);
+	};
+
+	return (
+		<Fragment>
+			<div className='navigation'>
+				<Link className='logo-container' to='/'>
+					<CrwnLogo className='logo' />
 				</Link>
 
-				<Link className='nav-link' to='/signIn'>
-					Sign In
-				</Link>
+				<div className='nav-links-container'>
+					<Link className='nav-link' to='/shop'>
+						SHOP
+					</Link>
+
+					{currentUser ? (
+						<span onClick={signOutHandler} className='nav-link'>
+							SIGN OUT
+						</span>
+					) : (
+						<Link className='nav-link' to='/signIn'>
+							SIGN IN
+						</Link>
+					)}
+				</div>
 			</div>
-		</div>
 
-		<Outlet />
-	</Fragment>
-);
+			<Outlet />
+		</Fragment>
+	);
+};
 
 export default Navigation;
