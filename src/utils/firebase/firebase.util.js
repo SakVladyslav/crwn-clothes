@@ -38,7 +38,9 @@ googleProvider.setCustomParameters({
 
 export const auth = getAuth();
 export const signInWithGooglePopup = () =>
-	signInWithPopup(auth, googleProvider);
+	signInWithPopup(auth, googleProvider).catch((error) =>
+		console.error(error.message)
+	);
 
 export const db = getFirestore();
 
