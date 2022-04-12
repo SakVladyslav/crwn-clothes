@@ -35,7 +35,7 @@ const Navigation = () => {
 							SIGN OUT
 						</NavLink>
 					) : (
-						<NavLink to='/signIn'>SIGN IN</NavLink>
+						<NavLink to='/auth'>SIGN IN</NavLink>
 					)}
 
 					<CartIcon />
