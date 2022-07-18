@@ -1,4 +1,13 @@
-export const categories = [
+import { Key } from 'react';
+
+export type DirectoryCategory = {
+	id: Key;
+	title: string;
+	imageUrl: string;
+	route: string;
+};
+
+export const categories: DirectoryCategory[] = [
 	{
 		id: 1,
 		title: 'hats',

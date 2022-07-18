@@ -15,7 +15,7 @@ import {
 	NavLink,
 	NavLinksContainer,
 	LogoContainer,
-} from './navigation.styles.jsx';
+} from './navigation.styles';
 import { signOutStart } from '../../store/user/user.action';
 
 const Navigation = () => {

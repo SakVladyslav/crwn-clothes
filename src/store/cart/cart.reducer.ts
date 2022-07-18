@@ -3,8 +3,8 @@ import { setCartItems, setIsCartOpen } from './cart.actions';
 import { CartItem } from './cart.types';
 
 export type CartState = {
-	readonly isCartOpen: boolean | undefined;
-	readonly cartItems: CartItem[] | undefined;
+	readonly isCartOpen: boolean;
+	readonly cartItems: CartItem[];
 };
 
 export const CART_INITIAL_STATE: CartState = {

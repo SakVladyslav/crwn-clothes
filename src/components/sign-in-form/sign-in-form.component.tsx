@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, FormEvent, ChangeEvent } from 'react';
 import { useDispatch } from 'react-redux';
 
 import FormInput from '../form-input/form-input.component';
@@ -9,7 +9,8 @@ import {
 	emailSignInStart,
 } from '../../store/user/user.action';
 
-import './sign-in-form.styles.scss';
+import './sign-in-form.styles.tsx';
+import { ButtonsContainer, SignInContainer } from './sign-in-form.styles';
 
 const defaultFormFields = {
 	email: '',
@@ -29,34 +30,25 @@ const SignInForm = () => {
 		setFormFields(defaultFormFields);
 	};
 
-	const handleSumbit = async (event) => {
+	const handleSumbit = async (event: FormEvent<HTMLFormElement>) => {
 		event.preventDefault();
 
 		try {
 			dispatch(emailSignInStart(email, password));
 			resetFormFields();
 		} catch (error) {
-			switch (error.code) {
-				case 'auth/wrong-password':
-					alert('incorrect password for email');
-					break;
-				case 'auth/user-not-found':
-					alert('no user associated with this email');
-					break;
-				default:
-					console.error(error);
-			}
+			console.error(error);
 		}
 	};
 
-	const handleChange = (event) => {
+	const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
 		const { name, value } = event.target;
 
 		setFormFields({ ...formFields, [name]: value });
 	};
 
 	return (
-		<div className='sign-up-container'>
+		<SignInContainer>
 			<h2>Already have an account?</h2>
 			<span>Sign in with your email and password</span>
 
@@ -79,17 +71,17 @@ const SignInForm = () => {
 					required
 				/>
 
-				<div className='buttons-container'>
-					<Button type='sumbit'>Sign In</Button>
+				<ButtonsContainer>
+					<Button type='submit'>Sign In</Button>
 					<Button
 						type='button'
 						onClick={signInWithGoogle}
 						buttonType={BUTTON_TYPE_CLASSES.google}>
 						Google Sign In
 					</Button>
-				</div>
+				</ButtonsContainer>
 			</form>
-		</div>
+		</SignInContainer>
 	);
 };
 
