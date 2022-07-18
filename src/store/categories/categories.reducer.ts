@@ -8,9 +8,9 @@ import {
 } from './categories.action';
 
 export type CategoriesState = {
-	readonly categories: Category[];
-	readonly isLoading: boolean;
-	readonly error: Error | null;
+	readonly categories: Category[] | undefined;
+	readonly isLoading: boolean | undefined;
+	readonly error: Error | null | undefined;
 };
 
 const CATEGORIES_INITIAL_STATE: CategoriesState = {
